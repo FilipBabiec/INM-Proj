@@ -6,12 +6,10 @@ import TournamentCreator from '../components/TournamentCreator/TournamentCreator
 
 function NewTournament() {
   return (
-    <React.Fragment>
-      <Navbar />
-      <FooterContainer />
       <main className='container'>
         <TournamentCreator />
       </main>
-    </React.Fragment>
   );
 }
+
+export default NewTournament

@@ -6,9 +6,9 @@ import TournamentCreator from '../components/TournamentCreator/TournamentCreator
 
 function NewTournament() {
   return (
-      <main className='container'>
+      <div className='container'>
         <TournamentCreator />
-      </main>
+      </div>
   );
 }
 

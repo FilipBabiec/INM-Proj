@@ -1,8 +1,5 @@
-.tournamentCreator {
-  display: 'flex';
-  justify-content: 'center';
-  align-items: 'center';
-  height: '100vh';
+.tournamentWrapper{
+  margin: 30px 0;
 }
 
 input, button {
@@ -13,3 +10,69 @@ input, button {
   display: flex;
   flex-direction: row;
 }
+
+.tournamentCreatorTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.inputTeam {
+  width: 150px;
+}
+
+.teamNameInputs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.line {
+  background: linear-gradient(to left, rgb(47, 47, 51), rgb(194, 136, 12));
+  height: 1px;
+}
+
+.number {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.submitButton {
+	background-color:#c2880c;
+	-webkit-border-radius:28px;
+	-moz-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #2f2f33;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f2f33;
+  transition: 250ms;
+}
+.submitButton:hover {
+	background-color:#2f2f33;
+  transition: 250ms;
+}
+.submitButton:active {
+	position:relative;
+	top:1px;
+}
+

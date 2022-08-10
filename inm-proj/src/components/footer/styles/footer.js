@@ -3,10 +3,6 @@ import styled from 'styled-components'
 export const Container = styled.div`
   padding: 20px 60px;
   background: radial-gradient(circle,rgb(194, 136, 12) 0%, rgb(47, 47, 51) 70%);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `
 
 export const Wrapper = styled.div`

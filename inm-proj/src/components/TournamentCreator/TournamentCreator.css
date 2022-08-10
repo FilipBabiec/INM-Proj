@@ -1,0 +1,15 @@
+.tournamentCreator {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  height: '100vh';
+}
+
+input, button {
+  height: 25px;
+}
+
+.counter {
+  display: flex;
+  flex-direction: row;
+}

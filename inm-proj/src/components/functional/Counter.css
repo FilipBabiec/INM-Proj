@@ -1,0 +1,18 @@
+.button_plus {
+  margin-left: 10px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  cursor: pointer;
+  border: 2px solid #095776;
+}
+
+.button_plus:hover {
+  background-color: #095776;
+  transition: 0.2s;
+}
+
+.counterDiv {
+  display: inline-block;
+  top: 100%;
+}

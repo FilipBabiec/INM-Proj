@@ -1,32 +1,31 @@
 .sidebar {
-  background-color: grey;
   height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
-}
-
-.menu-bars {
-  maring-left: 2rem;
-  font-size: 2rem;
-  background: none;
+  position: fixed;
+  top: 0;
+  right: 80px;
 }
 
 .side-menu {
-  background-color: black;
+  background-color: rgb(128, 128, 131);
   width: 250px;
   height: 100vh;
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 0;
+  top: 80px;
   left: -100%;
-  transition: 850ms;
+  transition: 2000ms;
+  font-size: 20px;
+  line-height: 200%;
+  opacity: 0.97;
 }
 
 .side-menu.active {
   left: 0;
-  transition: 350ms;
+  transition: 400ms;
 }
 
 .side-text {
@@ -36,12 +35,13 @@
   padding: 8px 0px 8px 16px;
   list-style: none;
   height: 60px;
+  opacity: 1;
 }
 
 .side-text a {
   text-decoration: none;
   color: white;
-  font-size: 18px;
+  font-size: 24px;
   width: 95%;
   height: 100%;
   display: flex;
@@ -56,14 +56,6 @@
 
 .side-menu-items {
   width: 100%;
-}
-
-.sidebar-toggle {
-  background-color: black;
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  align-items: center;
 }
 
 span {

@@ -1,22 +1,22 @@
 export const MenuItems = [
   {
     title: 'Home',
-    url: '#',
+    url: 'Home',
     cName: 'nav-links'
   },
   {
     title: 'Leaderboard',
-    url: '#',
-    cName: 'nav-links'
-  },
-  {
-    title: 'Show active tournaments',
-    url: '#',
+    url: 'Leaderboard',
     cName: 'nav-links'
   },
   {
     title: 'New tournament',
-    url: '#',
+    url: 'NewTournament',
+    cName: 'nav-links'
+  },
+  {
+    title: 'New tournament',
+    url: 'NewTournament',
     cName: 'nav-links-mobile'
   }
 ]

@@ -9,6 +9,8 @@
   border: none;
   cursor: pointer;
   color: rgb(47, 47, 51);
+  width: 200px;
+  transition: 250;
 }
 
 .btn:hover {

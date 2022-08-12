@@ -1,9 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import Counter from '../functional/Counter';
 import './TournamentCreator.css';
+import { Button } from '../functional/Button';
+import firebase from '../../firebase';
+import { Router } from 'react-router-dom';
+// import { notesRef } from '../../firebase'
 
 class TournamentCreator extends Component {
-  state = { name: undefined, rank: 3, teamNumber: 8, courts: 1 }
+  state = {
+    name: undefined,
+    rank: 3,
+    teamNumber: 8,
+    courts: 1,
+    teams: [
+      { id: 0, name: undefined },
+      { id: 1, name: undefined },
+      { id: 2, name: undefined },
+      { id: 3, name: undefined },
+      { id: 4, name: undefined },
+      { id: 5, name: undefined },
+      { id: 6, name: undefined },
+      { id: 7, name: undefined }
+    ]
+  }
 
   handleIncrementRank = () => {
     if (this.state.rank < 5) this.setState({ rank: this.state.rank + 1 });
@@ -26,19 +45,29 @@ class TournamentCreator extends Component {
   };
 
   handleDecrementTeams = () => {
-    if (this.state.teamNumber > 1) this.setState({ teamNumber: this.state.teamNumber - 1 });
+    if (this.state.teamNumber > 4) this.setState({ teamNumber: this.state.teamNumber - 1 });
   };
 
   setName = (val) => {
     this.setState({ name: val.target.value })
   }
 
+  setTeam = (val) => {
+    console.log(val.target.id)
+    let teams = [...this.state.teams];
+    let team = {...teams[val.target.id]}
+    team.name = val.target.value;
+    teams[val.target.id] = team;
+    this.setState({ teams })
+  }
+
+
   render() {
     return (
       <div className='tournamentWrapper'>
         <h1 className='tournamentCreatorTitle'><i className="fa-solid fa-volleyball"></i>Create your tournament<i className="fa-solid fa-volleyball"></i></h1>
         <div className='column'>
-          <h2>Enter name of the tournament:  </h2><input type="text" onChange={this.setName} placeholder='Tournament name'/>
+          <h2>Enter name of the tournament:  </h2><input type="text" onChange={this.setName} placeholder='Tournament name' />
         </div>
         <hr className="line" />
         <div className='column'>
@@ -69,10 +98,12 @@ class TournamentCreator extends Component {
           <div className='row'>
             <h2 className="counters">Team names: </h2>
           </div>
-          <div className='teamNameInputs'>{[...Array(this.state.teamNumber)].map((e, i) => <div key={i}><input className='inputTeam' type="text" onChange={this.getTeamName} placeholder='Team name'/></div>)}</div>
+          <div className='teamNameInputs'>
+            {[...Array(this.state.teamNumber)].map((e, i) => <span key={i}><input className='teamNameInputs' type="text" id={i} onChange={this.setTeam} placeholder='Team name' /></span>)}
+          </div>
         </div>
         <div className='column'>
-        <button><a href="#" class="submitButton">Submit</a></button>
+          <Button onClick={this.submitTournament}>Create</Button>
         </div>
         <hr className="line" />
       </div>

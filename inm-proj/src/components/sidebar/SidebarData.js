@@ -27,3 +27,24 @@ export const SidebarData = [
     cName: 'side-text'
   }
 ]
+
+// import React, {useState} from 'react'
+// import firebase from '../../firebase';
+
+// export default function SidebarData() {
+//   const [tournaments, getTournaments] = useState([]);
+
+//   // const ref = firebasecollection(firebase, "Tournaments")
+
+//   // const SidebarData = ref.data();
+//   return (
+//     <div>
+//       <h2>Tournaments: </h2>
+//       {tournaments.map((tournament) => (
+//         <div key={tournament.id}>
+//           <h3>{tournament.title}</h3>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }

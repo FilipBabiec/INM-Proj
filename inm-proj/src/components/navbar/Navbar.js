@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import { Button } from '../functional/Button';
 import { MenuItems } from "./MenuItems"
-import NewTournament from '../../pages/NewTournament';
+import firebase from '../../firebase';
 import './Navbar.css'
 import Sidebar from '../sidebar/Sidebar';
 import '../sidebar/Sidebar.css';
 
 class Navbar extends Component {
   state = { clicked: false }
+  
 
   handleClick = () => {
     this.setState({clicked: !this.state.clicked})

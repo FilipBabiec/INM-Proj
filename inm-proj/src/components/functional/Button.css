@@ -3,18 +3,20 @@
 }
 
 .btn {
-  padding: 8px 20px;
+  padding: 10px 20px;
   border-radius: 4px;
   outline: none;
   border: none;
   cursor: pointer;
   color: rgb(47, 47, 51);
   width: 200px;
-  transition: 250;
+  transition: 250ms;
+  height: 35px;
+
 }
 
 .btn:hover {
-  padding: 8px 20px;
+  padding: 5px 20px;
   transition: all 0.3s ease-out;
   background: white;
   color: rgb(194, 136, 12);
@@ -35,7 +37,7 @@
 }
 
 .btn--medium {
-  padding: 8px 20px;
+  padding: 5px 20px;
   border-radius: 4px;
   font-size: 18px;
   color: rgb(48, 45, 45);

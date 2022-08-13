@@ -1,26 +1,27 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import Counter from '../functional/Counter';
 import './TournamentCreator.css';
 import { Button } from '../functional/Button';
-import firebase from '../../firebase';
-import { Router } from 'react-router-dom';
-// import { notesRef } from '../../firebase'
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from "../../firebase";
+import ReactDOM from "react-dom";
+// import firebase from '../../firebase';
 
 class TournamentCreator extends Component {
   state = {
-    name: undefined,
+    name: '',
     rank: 3,
     teamNumber: 8,
     courts: 1,
     teams: [
-      { id: 0, name: undefined },
-      { id: 1, name: undefined },
-      { id: 2, name: undefined },
-      { id: 3, name: undefined },
-      { id: 4, name: undefined },
-      { id: 5, name: undefined },
-      { id: 6, name: undefined },
-      { id: 7, name: undefined }
+      { id: 0, name: 'Empty' },
+      { id: 1, name: 'Empty' },
+      { id: 2, name: 'Empty' },
+      { id: 3, name: 'Empty' },
+      { id: 4, name: 'Empty' },
+      { id: 5, name: 'Empty' },
+      { id: 6, name: 'Empty' },
+      { id: 7, name: 'Empty' }
     ]
   }
 
@@ -55,19 +56,55 @@ class TournamentCreator extends Component {
   setTeam = (val) => {
     console.log(val.target.id)
     let teams = [...this.state.teams];
-    let team = {...teams[val.target.id]}
+    let team = { ...teams[val.target.id] }
     team.name = val.target.value;
     teams[val.target.id] = team;
     this.setState({ teams })
   }
 
+  submitTournament = () => {
+    if (this.state.name === '')
+      alert("Tournament name needed!");
+    else {
+      if (true) {
+        this.setState({ name: '' })
+        this.setState({ rank: 3 })
+        this.setState({ courts: 1 })
+        this.setState({ teamNumber: 8 })
+        this.setState({ teams: [
+          { id: 0, name: 'Empty' },
+          { id: 1, name: 'Empty' },
+          { id: 2, name: 'Empty' },
+          { id: 3, name: 'Empty' },
+          { id: 4, name: 'Empty' },
+          { id: 5, name: 'Empty' },
+          { id: 6, name: 'Empty' },
+          { id: 7, name: 'Empty' }
+        ] })
+        try {
+          const docRef =  addDoc(collection(db, "Tournaments"), {
+            name: this.state.name,
+            rank: this.state.rank,
+            courts: this.state.courts,
+            teams: this.state.teams,
+          });
+          console.log("Tournament created with ID: ", docRef.id);
+          alert("Tournament created!");
+        } catch (e) {
+          console.log("Error adding document: ", e);
+          alert("Error creating tournament!")
+        }
+      }
+
+    }
+  }
 
   render() {
     return (
       <div className='tournamentWrapper'>
         <h1 className='tournamentCreatorTitle'><i className="fa-solid fa-volleyball"></i>Create your tournament<i className="fa-solid fa-volleyball"></i></h1>
         <div className='column'>
-          <h2>Enter name of the tournament:  </h2><input type="text" onChange={this.setName} placeholder='Tournament name' />
+          <h2>Enter name of the tournament:  </h2><input type="text" value={this.state.name} onChange={this.setName} placeholder='Tournament name' />
         </div>
         <hr className="line" />
         <div className='column'>
@@ -99,7 +136,7 @@ class TournamentCreator extends Component {
             <h2 className="counters">Team names: </h2>
           </div>
           <div className='teamNameInputs'>
-            {[...Array(this.state.teamNumber)].map((e, i) => <span key={i}><input className='teamNameInputs' type="text" id={i} onChange={this.setTeam} placeholder='Team name' /></span>)}
+            {[...Array(this.state.teamNumber)].map((e, i) => <span key={i}><input value={this.state.teams[i].name} className='teamNameInputs' type="text" id={i} onChange={this.setTeam} placeholder='Team name' /></span>)}
           </div>
         </div>
         <div className='column'>

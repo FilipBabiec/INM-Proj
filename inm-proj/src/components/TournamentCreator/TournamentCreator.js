@@ -4,7 +4,6 @@ import './TournamentCreator.css';
 import { Button } from '../functional/Button';
 import { collection, addDoc } from "firebase/firestore"; 
 import { db } from "../../firebase";
-import ReactDOM from "react-dom";
 // import firebase from '../../firebase';
 
 class TournamentCreator extends Component {
@@ -54,7 +53,6 @@ class TournamentCreator extends Component {
   }
 
   setTeam = (val) => {
-    console.log(val.target.id)
     let teams = [...this.state.teams];
     let team = { ...teams[val.target.id] }
     team.name = val.target.value;

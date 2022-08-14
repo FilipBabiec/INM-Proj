@@ -1,7 +1,7 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import { Button } from '../functional/Button';
 import { MenuItems } from "./MenuItems"
-import firebase from '../../firebase';
+// import firebase from '../../firebase';
 import './Navbar.css'
 import Sidebar from '../sidebar/Sidebar';
 import '../sidebar/Sidebar.css';

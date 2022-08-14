@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
-import { SidebarData } from './SidebarData';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 import './Sidebar.css';
 
 
 class Sidebar extends Component {
-  // state = { clicked: false }
 
-  // handleClick = () => {
-  //   this.setState({ clicked: !this.state.clicked })
-  // }
+  state = { SidebarData: [] }
+  async componentDidMount() {
+    const querySnapshot = await getDocs(collection(db, "Tournaments"));
+    querySnapshot.forEach((doc) => {
+      this.state.SidebarData.push(doc.data().name)
+    });
+  }
 
   render() {
     return (
       <>
-        <side className={this.props.hideShow ? 'side-menu' : 'side-menu active'}>
+      {/* {console.log('SidebarData: => ', SidebarData)} */}
+        <div className={this.props.hideShow ? 'side-menu' : 'side-menu active'}>
           <ul className='side-menu-items' style={{ listStyle: 'none' }}>
-            {SidebarData.map((item, index) => {
+            {this.state.SidebarData.map((item, index) => {
               return (
-                <li key={index} className={'item.cName'}>
-                  {item.icon}
-                  <span>{item.title}</span>
+                <li key={index} className={'side-text'}>
+                  <i className="fa-solid fa-volleyball"></i>
+                  <span>{item}</span>
                 </li>
               )
             })}
           </ul>
-        </side>
+        </div>
       </>
 
 

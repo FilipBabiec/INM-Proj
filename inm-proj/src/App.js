@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import { FooterContainer } from './containers/footer'
-import TournamentCreator from './components/TournamentCreator/TournamentCreator';
 import Home from './pages/Home';
 import NewTournament from './pages/NewTournament';
 import Reports from './pages/Reports';

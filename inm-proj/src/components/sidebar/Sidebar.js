@@ -17,14 +17,16 @@ class Sidebar extends Component {
   render() {
     return (
       <>
-      {/* {console.log('SidebarData: => ', SidebarData)} */}
+        {/* {console.log('SidebarData: => ', SidebarData)} */}
         <div className={this.props.hideShow ? 'side-menu' : 'side-menu active'}>
           <ul className='side-menu-items' style={{ listStyle: 'none' }}>
             {this.state.SidebarData.map((item, index) => {
               return (
                 <li key={index} className={'side-text'}>
-                  <i className="fa-solid fa-volleyball"></i>
-                  <span>{item}</span>
+                  <a href={'Tournament'}>
+                    <i className="fa-solid fa-volleyball">  </i>
+                    {item}
+                  </a>
                 </li>
               )
             })}

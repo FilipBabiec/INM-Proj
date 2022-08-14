@@ -5,6 +5,7 @@ import { FooterContainer } from './containers/footer'
 import Home from './pages/Home';
 import NewTournament from './pages/NewTournament';
 import Reports from './pages/Reports';
+import Tournament from './pages/Tournament';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/NewTournament" element={<NewTournament />} />
           <Route path="/Reports" element={<Reports />} />
+          <Route path="/Tournament" element={<Tournament />} />
         </Routes>
       </Router>
       <FooterContainer />

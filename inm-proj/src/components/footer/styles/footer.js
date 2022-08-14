@@ -12,6 +12,8 @@ export const Wrapper = styled.div`
   max-width: 1010px;
   margin: 0 auto;
   text-align: center;
+  // bottom: 0;
+  // position: sticky;
 `
 
 export const Column = styled.div`

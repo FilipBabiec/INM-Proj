@@ -16,8 +16,8 @@
   justify-content: center;
   position: fixed;
   top: 80px;
-  left: -100%;
-  transition: 2000ms;
+  left: -250px;
+  transition: 400ms;
   font-size: 20px;
   line-height: 200%;
   opacity: 0.97;
@@ -37,6 +37,7 @@
   opacity: 1;
   font-style: italic;
   margin-left: -20px;
+  cursor: pointer;
 
 }
 

@@ -7,8 +7,13 @@ import NewTournament from './pages/NewTournament';
 import Reports from './pages/Reports';
 import Tournament from './pages/Tournament';
 import './App.css';
+import { Container } from './components/footer/styles/footer';
+import { useState } from 'react';
 
 function App() {
+
+  const [tournamentName, setTournamentName] = useState();
+
   return (
     <>
       <Navbar />

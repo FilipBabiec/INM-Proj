@@ -99,7 +99,7 @@ class TournamentCreator extends Component {
 
   render() {
     return (
-      <div className='tournamentWrapper'>
+      <div className='newTournamentWrapper'>
         <h1 className='tournamentCreatorTitle'><i className="fa-solid fa-volleyball"></i>Create your tournament<i className="fa-solid fa-volleyball"></i></h1>
         <div className='column'>
           <h2>Enter name of the tournament:  </h2><input type="text" value={this.state.name} onChange={this.setName} placeholder='Tournament name' />

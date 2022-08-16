@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { Button } from '../functional/Button';
+// import { Button } from '../functional/Button';
 import { MenuItems } from "./MenuItems"
 // import firebase from '../../firebase';
 import './Navbar.css'
-import Sidebar from '../sidebar/Sidebar';
+// import Sidebar from '../sidebar/Sidebar';
 import '../sidebar/Sidebar.css';
 
 class Navbar extends Component {
-  state = { clicked: false }
+  // state = { clicked: false, tournamentName: undefined }
   
 
-  handleClick = () => {
-    this.setState({clicked: !this.state.clicked})
-  }
+  // handleClick = () => {
+  //   this.setState({clicked: !this.state.clicked})
+  // }
 
   render() {
     return(
@@ -30,8 +30,8 @@ class Navbar extends Component {
               )
             })}
           </ul>
-          <Button onClick={this.handleClick}>{this.state.clicked ? 'Hide tournaments' : 'Show tournaments'}</Button>
-          <Sidebar hideShow={this.state.clicked ? false : true} />
+          {/* <Button onClick={this.handleClick}>{this.state.clicked ? 'Hide tournaments' : 'Show tournaments'}</Button>
+          <Sidebar hideShow={this.state.clicked ? false : true} /> */}
         </nav>
       </>
       

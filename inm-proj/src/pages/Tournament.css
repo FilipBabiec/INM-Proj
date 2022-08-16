@@ -1,0 +1,68 @@
+.tournamentWrapper {
+  background-image: url(../../public/TournamentBackgroundGray.jpg);
+  margin: auto;
+}
+
+.titleT {
+  text-align: center;
+  margin: auto;
+}
+
+.ladder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 1000px;
+  width: auto;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.match {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 250px;
+  font-size: 15px;
+  color: white;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  font-size:22px;
+  height: 150px;
+  color: black;
+}
+
+.team {
+  border: 3px solid rgb(47, 47, 51);
+  border-radius: 15px;
+  background-color: rgb(134, 95, 10);
+  filter: none;
+  height: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 10px;
+}
+
+.hideShowButton {
+  height: 55px;
+  width: 35px;
+  transition: 400ms;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(69, 69, 73);
+  color: white;
+}
+
+.hideShowButton.active {
+  margin-left: 250px;
+  transition: 400ms;
+}

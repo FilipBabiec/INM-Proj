@@ -60,6 +60,7 @@
   cursor: pointer;
   background-color: rgb(69, 69, 73);
   color: white;
+  position: fixed;
 }
 
 .hideShowButton.active {

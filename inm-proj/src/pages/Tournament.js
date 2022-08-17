@@ -7,9 +7,11 @@ import "./Tournament.css"
 
 
 export default function Tournament() {
+  const [name, setName] = useState();
   const [clicked, setClicked] = useState(true);
   const [teams, setTeams] = useState([]);
   const [counter, setCounter] = useState(0);
+  const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
   async function componentDidMount() {
     if (counter === 0) {
@@ -17,6 +19,8 @@ export default function Tournament() {
       setTeams([]);
       const docOptionsRef = doc(db, "options", "selectedTournament");
       const docOptionsSnap = await getDoc(docOptionsRef);
+
+      setName(docOptionsSnap.data().name)
 
       const q = query(collection(db, "Tournaments"), where("name", "==", docOptionsSnap.data().name));
       const queryTournamentSnapshot = await getDocs(q);
@@ -42,13 +46,12 @@ export default function Tournament() {
     <div className='tournamentWrapper'>
       <button className={clicked ? 'hideShowButton active' : 'hideShowButton'} onClick={() => setClicked(!clicked)}>{clicked ? <i className='fa-solid fa-angle-left'></i> : <i className='fa-solid fa-angle-right'></i>}</button>
       <Sidebar hideShow={clicked ? false : true} />
-      <h1 className='titleT'>{teams}</h1>
+      <h1 className='titleT'>{name}</h1>
 
       <div className='ladder'>
 
 
         <div className='round'>
-
 
           <div className='match'>
             Match 1
@@ -100,6 +103,57 @@ export default function Tournament() {
         </div>
 
 
+        <div className='roundScore'>
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+                {scores[0]}
+              </div>
+              <div className='score'>
+              {scores[1]}
+              </div>
+            </div>
+          </div>
+
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+              {scores[2]}
+              </div>
+              <div className='score'>
+              {scores[3]}
+              </div>
+            </div>
+          </div>
+
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+              {scores[4]}
+              </div>
+              <div className='score'>
+              {scores[5]}
+              </div>
+            </div>
+          </div>
+
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+              {scores[6]}
+              </div>
+              <div className='score'>
+              {scores[7]}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className='round'>
 
 
@@ -129,6 +183,33 @@ export default function Tournament() {
         </div>
 
 
+        <div className='roundScore'>
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+              {scores[8]}
+              </div>
+              <div className='score'>
+              {scores[9]}
+              </div>
+            </div>
+          </div>
+
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+              {scores[10]}
+              </div>
+              <div className='score'>
+              {scores[11]}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div className='round'>
 
 
@@ -144,59 +225,24 @@ export default function Tournament() {
             </div>
           </div>
         </div>
+
+
+        <div className='roundScore'>
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+              {scores[12]}
+              </div>
+              <div className='score'>
+              {scores[13]}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </div >
   )
 }
 
-
-// [
-//   {
-//       "value": {
-//           "id": 0,
-//           "name": "a/a"
-//       }
-//   },
-//   {
-//       "value": {
-//           "id": 1,
-//           "name": "b/b"
-//       }
-//   },
-//   {
-//       "value": {
-//           "name": "c/c",
-//           "id": 2
-//       }
-//   },
-//   {
-//       "value": {
-//           "name": "d/d",
-//           "id": 3
-//       }
-//   },
-//   {
-//       "value": {
-//           "id": 4,
-//           "name": "e/e"
-//       }
-//   },
-//   {
-//       "value": {
-//           "name": "f/f",
-//           "id": 5
-//       }
-//   },
-//   {
-//       "value": {
-//           "name": "Empty",
-//           "id": 6
-//       }
-//   },
-//   {
-//       "value": {
-//           "name": "Empty",
-//           "id": 7
-//       }
-//   }
-// ]

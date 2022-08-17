@@ -9,19 +9,32 @@ import "./Tournament.css"
 export default function Tournament() {
   const [clicked, setClicked] = useState(true);
   const [teams, setTeams] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   async function componentDidMount() {
-    const docOptionsRef = doc(db, "options", "selectedTournament");
-    const docOptionsSnap = await getDoc(docOptionsRef);
+    if (counter === 0) {
+      setCounter(1);
+      setTeams([]);
+      const docOptionsRef = doc(db, "options", "selectedTournament");
+      const docOptionsSnap = await getDoc(docOptionsRef);
 
-    const q = query(collection(db, "Tournaments"), where("name", "==", docOptionsSnap.data().name));
-    const queryTournamentSnapshot = await getDocs(q);
+      const q = query(collection(db, "Tournaments"), where("name", "==", docOptionsSnap.data().name));
+      const queryTournamentSnapshot = await getDocs(q);
 
-    queryTournamentSnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      setTeams(doc.data().teams)
-      console.log(doc.data().teams)
-    });
+      queryTournamentSnapshot.forEach((doc) => {
+        const tempList = [];
+        doc.data().teams.map((value, index) => {
+          tempList.push({value})
+        })
+        // console.log(tempList[0].value.name)
+        const tempTeams = [];
+        for (var i=0; i<8; i++)
+        {
+          tempTeams.push(tempList[i].value.name)
+        }
+        setTeams(tempTeams)
+      });
+    }
   }
 
   componentDidMount()
@@ -135,3 +148,55 @@ export default function Tournament() {
     </div>
   )
 }
+
+
+// [
+//   {
+//       "value": {
+//           "id": 0,
+//           "name": "a/a"
+//       }
+//   },
+//   {
+//       "value": {
+//           "id": 1,
+//           "name": "b/b"
+//       }
+//   },
+//   {
+//       "value": {
+//           "name": "c/c",
+//           "id": 2
+//       }
+//   },
+//   {
+//       "value": {
+//           "name": "d/d",
+//           "id": 3
+//       }
+//   },
+//   {
+//       "value": {
+//           "id": 4,
+//           "name": "e/e"
+//       }
+//   },
+//   {
+//       "value": {
+//           "name": "f/f",
+//           "id": 5
+//       }
+//   },
+//   {
+//       "value": {
+//           "name": "Empty",
+//           "id": 6
+//       }
+//   },
+//   {
+//       "value": {
+//           "name": "Empty",
+//           "id": 7
+//       }
+//   }
+// ]

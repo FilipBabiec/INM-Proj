@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Sidebar from '../components/sidebar/Sidebar'
-import { doc, getDoc, where, collection, query, getDocs } from "firebase/firestore";
+import { doc, getDoc, where, collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
 import '../components/sidebar/Sidebar.css';
 import "./Tournament.css"
@@ -11,7 +11,12 @@ export default function Tournament() {
   const [clicked, setClicked] = useState(true);
   const [teams, setTeams] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [liveMatch, setLiveMatch] = useState({
+    scoreA: 0,
+    scoreB: 0,
+  });
+  const [currentLiveMatch, setCurrentLiveMatch] = useState();
 
   async function componentDidMount() {
     if (counter === 0) {
@@ -28,17 +33,47 @@ export default function Tournament() {
       queryTournamentSnapshot.forEach((doc) => {
         const tempList = [];
         doc.data().teams.map((value, index) => {
-          tempList.push({value})
+          tempList.push({ value })
         })
-        // console.log(tempList[0].value.name)
         const tempTeams = [];
-        for (var i=0; i<8; i++)
-        {
+        for (var i = 0; i < 8; i++) {
           tempTeams.push(tempList[i].value.name)
         }
         setTeams(tempTeams)
       });
     }
+
+    let id1 = 0;
+    let id2 = 0;
+    switch (currentLiveMatch) {
+      case 'match1':
+        id1 = 0;
+        id2 = 1;
+        break;
+      case 'match2':
+        id1 = 2;
+        id2 = 3;
+        break;
+      case 'match3':
+        id1 = 4;
+        id2 = 5;
+        break;
+      case 'match4':
+        id1 = 6;
+        id2 = 7;
+        break;
+    }
+
+    const tempOptions = []
+    const unsub = onSnapshot(doc(db, "liveTrounament", "scores"), (doc) => {
+      tempOptions.push(doc.data().scoreA)
+      tempOptions.push(doc.data().scoreB)
+      setLiveMatch(tempOptions)
+      setCurrentLiveMatch(doc.data().currentMatch)
+    })
+
+    scores[id1] = liveMatch[0];
+    scores[id2] = liveMatch[1];
   }
 
   componentDidMount()
@@ -108,10 +143,11 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
+                {console.log(scores)}
                 {scores[0]}
               </div>
               <div className='score'>
-              {scores[1]}
+                {scores[1]}
               </div>
             </div>
           </div>
@@ -120,22 +156,10 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
-              {scores[2]}
+                {scores[2]}
               </div>
               <div className='score'>
-              {scores[3]}
-              </div>
-            </div>
-          </div>
-
-          <div className='matchScore'>
-            Score:
-            <div className='scores'>
-              <div className='score'>
-              {scores[4]}
-              </div>
-              <div className='score'>
-              {scores[5]}
+                {scores[3]}
               </div>
             </div>
           </div>
@@ -144,10 +168,22 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
-              {scores[6]}
+                {scores[4]}
               </div>
               <div className='score'>
-              {scores[7]}
+                {scores[5]}
+              </div>
+            </div>
+          </div>
+
+          <div className='matchScore'>
+            Score:
+            <div className='scores'>
+              <div className='score'>
+                {scores[6]}
+              </div>
+              <div className='score'>
+                {scores[7]}
               </div>
             </div>
           </div>
@@ -188,10 +224,10 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
-              {scores[8]}
+                {scores[8]}
               </div>
               <div className='score'>
-              {scores[9]}
+                {scores[9]}
               </div>
             </div>
           </div>
@@ -200,10 +236,10 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
-              {scores[10]}
+                {scores[10]}
               </div>
               <div className='score'>
-              {scores[11]}
+                {scores[11]}
               </div>
             </div>
           </div>
@@ -232,10 +268,10 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
-              {scores[12]}
+                {scores[12]}
               </div>
               <div className='score'>
-              {scores[13]}
+                {scores[13]}
               </div>
             </div>
           </div>

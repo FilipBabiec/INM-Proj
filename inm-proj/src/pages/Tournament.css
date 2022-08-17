@@ -14,7 +14,7 @@
   justify-content: space-evenly;
   height: 1000px;
   width: auto;
-  margin-left: 200px;
+  /* margin-left: 200px; */
 }
 
 .round {
@@ -63,7 +63,7 @@
   width: 50px;
   font-size: 15px;
   color: white;
-  margin-right: 250px;
+  /* margin-right: 250px; */
 }
 
 .scores{

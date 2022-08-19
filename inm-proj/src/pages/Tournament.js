@@ -13,10 +13,12 @@ export default function Tournament() {
   const [counter, setCounter] = useState(0);
   const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [liveMatch, setLiveMatch] = useState({
+    currentMatch: 'None',
+    teamA: 'None',
+    teamB: 'None',
     scoreA: 0,
     scoreB: 0,
   });
-  const [currentLiveMatch, setCurrentLiveMatch] = useState();
 
   async function componentDidMount() {
     if (counter === 0) {
@@ -42,10 +44,25 @@ export default function Tournament() {
         setTeams(tempTeams)
       });
     }
+  }
 
+  async function getDataUpdates() {
+    const unsub = onSnapshot(doc(db, "liveTrounament", "options"), (doc) => {
+      const tempArr = [];
+
+      const liveOptions = {
+        currentMatch: doc.data().currentMatch,
+        teamA: doc.data().teamA,
+        teamB: doc.data().teamB,
+        scoreA: doc.data().scoreA,
+        scoreB: doc.data().scoreB
+      }
+      tempArr.push(liveOptions)
+      setLiveMatch(tempArr)
+    });
     let id1 = 0;
     let id2 = 0;
-    switch (currentLiveMatch) {
+    switch (liveMatch[0].currentMatch) {
       case 'match1':
         id1 = 0;
         id2 = 1;
@@ -63,20 +80,12 @@ export default function Tournament() {
         id2 = 7;
         break;
     }
-
-    const tempOptions = []
-    const unsub = onSnapshot(doc(db, "liveTrounament", "scores"), (doc) => {
-      tempOptions.push(doc.data().scoreA)
-      tempOptions.push(doc.data().scoreB)
-      setLiveMatch(tempOptions)
-      setCurrentLiveMatch(doc.data().currentMatch)
-    })
-
-    scores[id1] = liveMatch[0];
-    scores[id2] = liveMatch[1];
+    if (scores[id1] !== liveMatch[0]) scores[id1] = liveMatch[0].scoreA
+    if (scores[id2] !== liveMatch[0]) scores[id2] = liveMatch[0].scoreB
   }
 
   componentDidMount()
+  getDataUpdates()
   return (
     <div className='tournamentWrapper'>
       <button className={clicked ? 'hideShowButton active' : 'hideShowButton'} onClick={() => setClicked(!clicked)}>{clicked ? <i className='fa-solid fa-angle-left'></i> : <i className='fa-solid fa-angle-right'></i>}</button>
@@ -87,7 +96,6 @@ export default function Tournament() {
 
 
         <div className='round'>
-
           <div className='match'>
             Match 1
             <div className='teams'>
@@ -143,7 +151,6 @@ export default function Tournament() {
             Score:
             <div className='scores'>
               <div className='score'>
-                {console.log(scores)}
                 {scores[0]}
               </div>
               <div className='score'>

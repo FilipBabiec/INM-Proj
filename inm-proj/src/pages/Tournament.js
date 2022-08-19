@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Sidebar from '../components/sidebar/Sidebar'
-import { doc, getDoc, where, collection, query, getDocs, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, where, collection, query, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from '../firebase';
 import '../components/sidebar/Sidebar.css';
 import "./Tournament.css"
@@ -38,7 +38,7 @@ export default function Tournament() {
           tempList.push({ value })
         })
         const tempTeams = [];
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 14; i++) {
           tempTeams.push(tempList[i].value.name)
         }
         setTeams(tempTeams)
@@ -60,28 +60,87 @@ export default function Tournament() {
       tempArr.push(liveOptions)
       setLiveMatch(tempArr)
     });
+
+    //Setting current live match
     let id1 = 0;
     let id2 = 0;
+    let idN = 0;
     switch (liveMatch[0].currentMatch) {
       case 'match1':
         id1 = 0;
         id2 = 1;
+        idN = 8;
+        liveMatch[0].teamA = teams[0];
+        liveMatch[0].teamB = teams[4];
         break;
       case 'match2':
         id1 = 2;
         id2 = 3;
+        idN = 9;
+        liveMatch[0].teamA = teams[1];
+        liveMatch[0].teamB = teams[5];
         break;
       case 'match3':
         id1 = 4;
         id2 = 5;
+        idN = 10;
+        liveMatch[0].teamA = teams[2];
+        liveMatch[0].teamB = teams[6];
         break;
       case 'match4':
         id1 = 6;
         id2 = 7;
+        idN = 11;
+        liveMatch[0].teamA = teams[3];
+        liveMatch[0].teamB = teams[7];
+        break;
+      case 'semifinal1':
+        id1 = 8;
+        id2 = 9;
+        idN = 12;
+        liveMatch[0].teamA = teams[8];
+        liveMatch[0].teamB = teams[9];
+        break;
+      case 'semifinal2':
+        id1 = 10;
+        id2 = 11;
+        idN = 13;
+        liveMatch[0].teamA = teams[10];
+        liveMatch[0].teamB = teams[11];
+        break;
+      case 'final':
+        id1 = 12;
+        id2 = 13;
+        liveMatch[0].teamA = teams[12];
+        liveMatch[0].teamB = teams[13];
         break;
     }
-    if (scores[id1] !== liveMatch[0]) scores[id1] = liveMatch[0].scoreA
-    if (scores[id2] !== liveMatch[0]) scores[id2] = liveMatch[0].scoreB
+    if (scores[id1] !== liveMatch[0].scoreA) scores[id1] = liveMatch[0].scoreA
+    if (scores[id2] !== liveMatch[0].scoreB) scores[id2] = liveMatch[0].scoreB
+
+    //Winning conditions
+    if ((scores[id1] >= 21 && scores[id1] > scores[id2] + 1) || liveMatch[0].teamB === "Empty") {
+      //teamA == Winner
+      //resetLiveScoresDB() and resetCurrentMatchDB()
+      //moveWinnerTeamToAppropriateSpot()
+      teams[idN] = liveMatch[0].teamA
+
+      const tournamentRef = doc((db, "Tournaments"), where("name", "==", name))
+      await updateDoc(tournamentRef, {
+        teams: teams,
+      })
+    }
+    else if ((scores[id2] >= 21 && scores[id2] > scores[id1] + 1) || liveMatch[0].teamA === "Empty") {
+      //teamB == Winner
+      //resetLiveScoresDB() and resetCurrentMatchDB()
+      //moveWinnerTeamToAppropriateSpot()
+      teams[idN] = liveMatch[0].teamB
+
+      const tournamentRef = doc((db, "Tournaments"), where("name", "==", name))
+      await updateDoc(tournamentRef, {
+        teams: teams,
+      })
+    }
   }
 
   componentDidMount()
@@ -204,10 +263,10 @@ export default function Tournament() {
             Semifinal 1
             <div className='teams'>
               <div className='team'>
-                Winner match 1
+                {teams[8]}
               </div>
               <div className='team'>
-                Winner match 2
+                {teams[9]}
               </div>
             </div>
           </div>
@@ -216,10 +275,10 @@ export default function Tournament() {
             Semifinal 2
             <div className='teams'>
               <div className='team'>
-                Winner match 3
+                {teams[10]}
               </div>
               <div className='team'>
-                Winner match 4
+                {teams[11]}
               </div>
             </div>
           </div>
@@ -260,10 +319,10 @@ export default function Tournament() {
             Final
             <div className='teams'>
               <div className='team'>
-                Winner semifinal 1
+                {teams[12]}
               </div>
               <div className='team'>
-                Winner semifinal 2
+                {teams[13]}
               </div>
             </div>
           </div>

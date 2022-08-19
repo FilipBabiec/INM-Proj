@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Counter from '../functional/Counter';
 import './TournamentCreator.css';
 import { Button } from '../functional/Button';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 // import firebase from '../../firebase';
 
@@ -20,7 +20,13 @@ class TournamentCreator extends Component {
       { id: 4, name: 'Empty' },
       { id: 5, name: 'Empty' },
       { id: 6, name: 'Empty' },
-      { id: 7, name: 'Empty' }
+      { id: 7, name: 'Empty' },
+      { id: 8, name: 'Winner match1' },
+      { id: 9, name: 'Winner match2' },
+      { id: 10, name: 'Winner match3' },
+      { id: 11, name: 'Winner match4' },
+      { id: 12, name: 'Winner semifinal1' },
+      { id: 13, name: 'Winner semifinal2' }
     ]
   }
 
@@ -69,18 +75,26 @@ class TournamentCreator extends Component {
         this.setState({ rank: 3 })
         this.setState({ courts: 1 })
         this.setState({ teamNumber: 8 })
-        this.setState({ teams: [
-          { id: 0, name: 'Empty' },
-          { id: 1, name: 'Empty' },
-          { id: 2, name: 'Empty' },
-          { id: 3, name: 'Empty' },
-          { id: 4, name: 'Empty' },
-          { id: 5, name: 'Empty' },
-          { id: 6, name: 'Empty' },
-          { id: 7, name: 'Empty' }
-        ] })
+        this.setState({
+          teams: [
+            { id: 0, name: 'Empty' },
+            { id: 1, name: 'Empty' },
+            { id: 2, name: 'Empty' },
+            { id: 3, name: 'Empty' },
+            { id: 4, name: 'Empty' },
+            { id: 5, name: 'Empty' },
+            { id: 6, name: 'Empty' },
+            { id: 7, name: 'Empty' },
+            { id: 8, name: 'Winner match1' },
+            { id: 9, name: 'Winner match2' },
+            { id: 10, name: 'Winner match3' },
+            { id: 11, name: 'Winner match4' },
+            { id: 12, name: 'Winner semifinal1' },
+            { id: 13, name: 'Winner semifinal2' }
+          ]
+        })
         try {
-          const docRef =  addDoc(collection(db, "Tournaments"), {
+          const docRef = addDoc(collection(db, "Tournaments"), {
             name: this.state.name,
             rank: this.state.rank,
             courts: this.state.courts,

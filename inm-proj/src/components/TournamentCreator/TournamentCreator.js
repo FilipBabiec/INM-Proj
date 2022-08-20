@@ -27,7 +27,8 @@ class TournamentCreator extends Component {
       { id: 11, name: 'Winner match4' },
       { id: 12, name: 'Winner semifinal1' },
       { id: 13, name: 'Winner semifinal2' }
-    ]
+    ],
+    scores: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   }
 
   handleIncrementRank = () => {
@@ -99,6 +100,7 @@ class TournamentCreator extends Component {
             rank: this.state.rank,
             courts: this.state.courts,
             teams: this.state.teams,
+            scores: this.state.scores,
           });
           console.log("Tournament created with ID: ", docRef.id);
           alert("Tournament created!");

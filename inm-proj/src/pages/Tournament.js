@@ -8,10 +8,11 @@ import "./Tournament.css"
 
 export default function Tournament() {
   const [name, setName] = useState();
+  const [tournamentID, setTournamentID] = useState();
   const [clicked, setClicked] = useState(true);
   const [teams, setTeams] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [scores, setScores] = useState([]);
   const [liveMatch, setLiveMatch] = useState({
     currentMatch: 'None',
     teamA: 'None',
@@ -28,12 +29,15 @@ export default function Tournament() {
       const docOptionsSnap = await getDoc(docOptionsRef);
 
       setName(docOptionsSnap.data().name)
+      // setTournamentID(docOptionsSnap.id)
+
 
       const q = query(collection(db, "Tournaments"), where("name", "==", docOptionsSnap.data().name));
       const queryTournamentSnapshot = await getDocs(q);
 
       queryTournamentSnapshot.forEach((doc) => {
         const tempList = [];
+        const tempScores = [];
         doc.data().teams.map((value, index) => {
           tempList.push({ value })
         })
@@ -41,12 +45,15 @@ export default function Tournament() {
         for (var i = 0; i < 14; i++) {
           tempTeams.push(tempList[i].value.name)
         }
+        setTournamentID(doc.id)
+        setScores(doc.data().scores)
         setTeams(tempTeams)
       });
     }
   }
 
   async function getDataUpdates() {
+    let win = 0;
     const unsub = onSnapshot(doc(db, "liveTrounament", "options"), (doc) => {
       const tempArr = [];
 
@@ -114,21 +121,46 @@ export default function Tournament() {
         liveMatch[0].teamA = teams[12];
         liveMatch[0].teamB = teams[13];
         break;
+      default:
+        id1 = 14;
+        id2 = 15;
+        break;
     }
     if (scores[id1] !== liveMatch[0].scoreA) scores[id1] = liveMatch[0].scoreA
     if (scores[id2] !== liveMatch[0].scoreB) scores[id2] = liveMatch[0].scoreB
+
+    // console.log(tournamentID)
+
 
     //Winning conditions
     if ((scores[id1] >= 21 && scores[id1] > scores[id2] + 1) || liveMatch[0].teamB === "Empty") {
       //teamA == Winner
       //resetLiveScoresDB() and resetCurrentMatchDB()
-      //moveWinnerTeamToAppropriateSpot()
       teams[idN] = liveMatch[0].teamA
 
-      const tournamentRef = doc((db, "Tournaments"), where("name", "==", name))
-      await updateDoc(tournamentRef, {
-        teams: teams,
-      })
+      // console.log(tournamentID)
+      // console.log(teams)
+      // const tournamentRef = doc(db, "Tournaments", tournamentID);
+      // await updateDoc(tournamentRef, {
+      //   teams: [
+      //     { id: 0, name: teams[0] },
+      //     { id: 1, name: teams[1] },
+      //     { id: 2, name: teams[2] },
+      //     { id: 3, name: teams[3] },
+      //     { id: 4, name: teams[4] },
+      //     { id: 5, name: teams[5] },
+      //     { id: 6, name: teams[6] },
+      //     { id: 7, name: teams[7] },
+      //     { id: 8, name: teams[8] },
+      //     { id: 9, name: teams[9] },
+      //     { id: 10, name: teams[10] },
+      //     { id: 11, name: teams[11] },
+      //     { id: 12, name: teams[12] },
+      //     { id: 13, name: teams[13] }
+      //   ],
+      //   scores: scores,
+      // })
+
     }
     else if ((scores[id2] >= 21 && scores[id2] > scores[id1] + 1) || liveMatch[0].teamA === "Empty") {
       //teamB == Winner
@@ -136,10 +168,10 @@ export default function Tournament() {
       //moveWinnerTeamToAppropriateSpot()
       teams[idN] = liveMatch[0].teamB
 
-      const tournamentRef = doc((db, "Tournaments"), where("name", "==", name))
-      await updateDoc(tournamentRef, {
-        teams: teams,
-      })
+    }
+    else
+    {
+      
     }
   }
 

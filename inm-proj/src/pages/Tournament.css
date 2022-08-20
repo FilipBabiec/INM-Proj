@@ -6,6 +6,8 @@
 .titleT {
   text-align: center;
   margin: auto;
+  color: white;
+  font-style: oblique;
 }
 
 .ladder {
@@ -119,3 +121,7 @@
   display: inline;
 }
 
+.fa-crown {
+  color: rgb(255, 238, 0);
+  margin-left: 7px;
+}

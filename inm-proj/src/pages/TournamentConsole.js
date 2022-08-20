@@ -50,12 +50,12 @@ export default function TournamentConsole() {
   }
 
   function handleDecrement(id) {
-    if (scores[id] > 0) scores[id] = scores[id] - 1;
+    if (scores[id] > 0) scores[id]--;
     handleUpdate(id, 0)
     updateDB()
   };
   function handleIncrement(id) {
-    scores[id] = scores[id] + 1;
+    scores[id]++;
     handleUpdate(id, 0)
     updateDB()
   };

@@ -1,0 +1,28 @@
+.homeWrapper {
+  background-image: url(../../public/BeachVolleyballImgGray.jpg);
+  margin: auto;
+  height: 725px;
+}
+
+.textAbout {
+  text-align: center;
+  margin: auto;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  font-size: 25px;
+  width: 70%;
+}
+
+.logoAbout {
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+  width: 70%;
+  padding: 90px 0;
+}

@@ -4,7 +4,7 @@ import Navbar from './components/navbar/Navbar';
 import { FooterContainer } from './containers/footer'
 import Home from './pages/Home';
 import NewTournament from './pages/NewTournament';
-import Reports from './pages/Reports';
+import About from './pages/About';
 import Tournament from './pages/Tournament';
 import TournamentConsole from './pages/TournamentConsole';
 import './App.css';
@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/NewTournament" element={<NewTournament />} />
-          <Route path="/Reports" element={<Reports />} />
+          <Route path="/About" element={<About />} />
           <Route path="/Tournament" element={<Tournament />} />
           <Route path="/TC" element={<TournamentConsole />} />
         </Routes>

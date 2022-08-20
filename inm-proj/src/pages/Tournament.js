@@ -36,7 +36,7 @@ export default function Tournament() {
           tempList.push({ value })
         })
         const tempTeams = [];
-        for (var i = 0; i < 14; i++) {
+        for (var i = 0; i < 15; i++) {
           tempTeams.push(tempList[i].value.name)
         }
         setTournamentID(doc.id)
@@ -50,7 +50,7 @@ export default function Tournament() {
   async function getDataUpdates() {
     const unsub = onSnapshot(doc(db, "Tournaments", tournamentID), (doc) => {
       let tempArr = []
-      for (var step = 0; step < 14; step++) {
+      for (var step = 0; step < 15; step++) {
         tempArr.push(doc.data().teams[step].name)
       }
       setTeams(tempArr)
@@ -80,7 +80,7 @@ export default function Tournament() {
                 {teams[0]}
               </div>
               <div className='team'>
-                {teams[4]}
+                {teams[1]}
               </div>
             </div>
           </div>
@@ -89,10 +89,10 @@ export default function Tournament() {
             Match 2
             <div className='teams'>
               <div className='team'>
-                {teams[1]}
+                {teams[2]}
               </div>
               <div className='team'>
-                {teams[5]}
+                {teams[3]}
               </div>
             </div>
           </div>
@@ -101,10 +101,10 @@ export default function Tournament() {
             Match 3
             <div className='teams'>
               <div className='team'>
-                {teams[2]}
+                {teams[4]}
               </div>
               <div className='team'>
-                {teams[6]}
+                {teams[5]}
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function Tournament() {
             Match 4
             <div className='teams'>
               <div className='team'>
-                {teams[3]}
+                {teams[6]}
               </div>
               <div className='team'>
                 {teams[7]}
@@ -267,7 +267,7 @@ export default function Tournament() {
 
           <div className='match'>
               <div className='teamWinner'>
-                {teams[14]}
+                {teams[14]}<i className="fa-solid fa-crown"></i>
               </div>
           </div>
         </div>

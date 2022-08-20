@@ -26,7 +26,8 @@ class TournamentCreator extends Component {
       { id: 10, name: 'Winner match3' },
       { id: 11, name: 'Winner match4' },
       { id: 12, name: 'Winner semifinal1' },
-      { id: 13, name: 'Winner semifinal2' }
+      { id: 13, name: 'Winner semifinal2' },
+      { id: 14, name: 'Winner' }
     ],
     scores: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   }
@@ -71,6 +72,14 @@ class TournamentCreator extends Component {
     if (this.state.name === '')
       alert("Tournament name needed!");
     else {
+      //Shuffle teams and place them in the correct spots
+      const tempArr = this.state.teams
+      this.state.teams[1] = tempArr[4];
+      this.state.teams[2] = tempArr[1];
+      this.state.teams[3] = tempArr[5];
+      this.state.teams[4] = tempArr[2];
+      this.state.teams[5] = tempArr[6];
+      this.state.teams[6] = tempArr[3];
       if (true) {
         this.setState({ name: '' })
         this.setState({ rank: 3 })

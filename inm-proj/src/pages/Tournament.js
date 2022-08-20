@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Sidebar from '../components/sidebar/Sidebar'
-import { doc, getDoc, where, collection, query, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, getDoc, where, collection, query, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from '../firebase';
 import '../components/sidebar/Sidebar.css';
 import "./Tournament.css"
@@ -13,13 +13,7 @@ export default function Tournament() {
   const [teams, setTeams] = useState([]);
   const [counter, setCounter] = useState(0);
   const [scores, setScores] = useState([]);
-  const [liveMatch, setLiveMatch] = useState({
-    currentMatch: 'None',
-    teamA: 'None',
-    teamB: 'None',
-    scoreA: 0,
-    scoreB: 0,
-  });
+
 
   async function componentDidMount() {
     if (counter === 0) {
@@ -32,12 +26,12 @@ export default function Tournament() {
       // setTournamentID(docOptionsSnap.id)
 
 
+      //Initial read from the DB
       const q = query(collection(db, "Tournaments"), where("name", "==", docOptionsSnap.data().name));
       const queryTournamentSnapshot = await getDocs(q);
 
       queryTournamentSnapshot.forEach((doc) => {
         const tempList = [];
-        const tempScores = [];
         doc.data().teams.map((value, index) => {
           tempList.push({ value })
         })
@@ -52,127 +46,19 @@ export default function Tournament() {
     }
   }
 
+  //Checking for real time updates from the DB
   async function getDataUpdates() {
-    let win = 0;
-    const unsub = onSnapshot(doc(db, "liveTrounament", "options"), (doc) => {
-      const tempArr = [];
-
-      const liveOptions = {
-        currentMatch: doc.data().currentMatch,
-        teamA: doc.data().teamA,
-        teamB: doc.data().teamB,
-        scoreA: doc.data().scoreA,
-        scoreB: doc.data().scoreB
+    const unsub = onSnapshot(doc(db, "Tournaments", tournamentID), (doc) => {
+      let tempArr = []
+      for (var step = 0; step < 14; step++) {
+        tempArr.push(doc.data().teams[step].name)
       }
-      tempArr.push(liveOptions)
-      setLiveMatch(tempArr)
-    });
-
-    //Setting current live match
-    let id1 = 0;
-    let id2 = 0;
-    let idN = 0;
-    switch (liveMatch[0].currentMatch) {
-      case 'match1':
-        id1 = 0;
-        id2 = 1;
-        idN = 8;
-        liveMatch[0].teamA = teams[0];
-        liveMatch[0].teamB = teams[4];
-        break;
-      case 'match2':
-        id1 = 2;
-        id2 = 3;
-        idN = 9;
-        liveMatch[0].teamA = teams[1];
-        liveMatch[0].teamB = teams[5];
-        break;
-      case 'match3':
-        id1 = 4;
-        id2 = 5;
-        idN = 10;
-        liveMatch[0].teamA = teams[2];
-        liveMatch[0].teamB = teams[6];
-        break;
-      case 'match4':
-        id1 = 6;
-        id2 = 7;
-        idN = 11;
-        liveMatch[0].teamA = teams[3];
-        liveMatch[0].teamB = teams[7];
-        break;
-      case 'semifinal1':
-        id1 = 8;
-        id2 = 9;
-        idN = 12;
-        liveMatch[0].teamA = teams[8];
-        liveMatch[0].teamB = teams[9];
-        break;
-      case 'semifinal2':
-        id1 = 10;
-        id2 = 11;
-        idN = 13;
-        liveMatch[0].teamA = teams[10];
-        liveMatch[0].teamB = teams[11];
-        break;
-      case 'final':
-        id1 = 12;
-        id2 = 13;
-        liveMatch[0].teamA = teams[12];
-        liveMatch[0].teamB = teams[13];
-        break;
-      default:
-        id1 = 14;
-        id2 = 15;
-        break;
-    }
-    if (scores[id1] !== liveMatch[0].scoreA) scores[id1] = liveMatch[0].scoreA
-    if (scores[id2] !== liveMatch[0].scoreB) scores[id2] = liveMatch[0].scoreB
-
-    // console.log(tournamentID)
-
-
-    //Winning conditions
-    if ((scores[id1] >= 21 && scores[id1] > scores[id2] + 1) || liveMatch[0].teamB === "Empty") {
-      //teamA == Winner
-      //resetLiveScoresDB() and resetCurrentMatchDB()
-      teams[idN] = liveMatch[0].teamA
-
-      // console.log(tournamentID)
+      setTeams(tempArr)
+      setScores(doc.data().scores)
       // console.log(teams)
-      // const tournamentRef = doc(db, "Tournaments", tournamentID);
-      // await updateDoc(tournamentRef, {
-      //   teams: [
-      //     { id: 0, name: teams[0] },
-      //     { id: 1, name: teams[1] },
-      //     { id: 2, name: teams[2] },
-      //     { id: 3, name: teams[3] },
-      //     { id: 4, name: teams[4] },
-      //     { id: 5, name: teams[5] },
-      //     { id: 6, name: teams[6] },
-      //     { id: 7, name: teams[7] },
-      //     { id: 8, name: teams[8] },
-      //     { id: 9, name: teams[9] },
-      //     { id: 10, name: teams[10] },
-      //     { id: 11, name: teams[11] },
-      //     { id: 12, name: teams[12] },
-      //     { id: 13, name: teams[13] }
-      //   ],
-      //   scores: scores,
-      // })
-
-    }
-    else if ((scores[id2] >= 21 && scores[id2] > scores[id1] + 1) || liveMatch[0].teamA === "Empty") {
-      //teamB == Winner
-      //resetLiveScoresDB() and resetCurrentMatchDB()
-      //moveWinnerTeamToAppropriateSpot()
-      teams[idN] = liveMatch[0].teamB
-
-    }
-    else
-    {
-      
-    }
+      // console.log(scores)
+      // console.log(tournamentID)
+    });
   }
 
   componentDidMount()
@@ -372,6 +258,17 @@ export default function Tournament() {
                 {scores[13]}
               </div>
             </div>
+          </div>
+        </div>
+
+
+        <div className='round'>
+
+
+          <div className='match'>
+              <div className='teamWinner'>
+                {teams[14]}
+              </div>
           </div>
         </div>
 

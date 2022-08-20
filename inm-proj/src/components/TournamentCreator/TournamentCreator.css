@@ -76,3 +76,8 @@ input, button {
 	top:1px;
 }
 
+.matchTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

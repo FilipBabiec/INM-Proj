@@ -109,10 +109,6 @@ export default function TournamentConsole() {
           case 13:
             idS = 14
             break;
-
-          default:
-            idS = 0;
-            break;
         }
         teams[idS].name = teams[id].name;
       }

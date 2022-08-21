@@ -135,14 +135,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(0)} onDecrement={(event) => handleDecrement(0)} />
         </div>
-        <div className='number'>{scores[0]}</div>
+        {/* <div className='number'>{scores[0]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(1)} onDecrement={(event) => handleDecrement(1)} />
         </div>
-        <div className='number'>{scores[1]}</div>
+        {/* <div className='number'>{scores[1]}</div> */}
       </div>
       <hr className="line" />
 
@@ -153,14 +153,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(2)} onDecrement={(event) => handleDecrement(2)} />
         </div>
-        <div className='number'>{scores[2]}</div>
+        {/* <div className='number'>{scores[2]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(3)} onDecrement={(event) => handleDecrement(3)} />
         </div>
-        <div className='number'>{scores[3]}</div>
+        {/* <div className='number'>{scores[3]}</div> */}
       </div>
       <hr className="line" />
       
@@ -171,14 +171,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(4)} onDecrement={(event) => handleDecrement(4)} />
         </div>
-        <div className='number'>{scores[4]}</div>
+        {/* <div className='number'>{scores[4]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(5)} onDecrement={(event) => handleDecrement(5)} />
         </div>
-        <div className='number'>{scores[5]}</div>
+        {/* <div className='number'>{scores[5]}</div> */}
       </div>
       <hr className="line" />
 
@@ -189,14 +189,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(6)} onDecrement={(event) => handleDecrement(6)} />
         </div>
-        <div className='number'>{scores[6]}</div>
+        {/* <div className='number'>{scores[6]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(7)} onDecrement={(event) => handleDecrement(7)} />
         </div>
-        <div className='number'>{scores[7]}</div>
+        {/* <div className='number'>{scores[7]}</div> */}
       </div>
       <hr className="line" />
 
@@ -207,14 +207,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(8)} onDecrement={(event) => handleDecrement(8)} />
         </div>
-        <div className='number'>{scores[8]}</div>
+        {/* <div className='number'>{scores[8]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(9)} onDecrement={(event) => handleDecrement(9)} />
         </div>
-        <div className='number'>{scores[9]}</div>
+        {/* <div className='number'>{scores[9]}</div> */}
       </div>
       <hr className="line" />
 
@@ -225,14 +225,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(10)} onDecrement={(event) => handleDecrement(10)} />
         </div>
-        <div className='number'>{scores[10]}</div>
+        {/* <div className='number'>{scores[10]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(11)} onDecrement={(event) => handleDecrement(11)} />
         </div>
-        <div className='number'>{scores[11]}</div>
+        {/* <div className='number'>{scores[11]}</div> */}
       </div>
       <hr className="line" />
 
@@ -243,14 +243,14 @@ export default function TournamentConsole() {
           <h2 className="counters">Score team A: </h2>
           <Counter onIncrement={(event) => handleIncrement(12)} onDecrement={(event) => handleDecrement(12)} />
         </div>
-        <div className='number'>{scores[12]}</div>
+        {/* <div className='number'>{scores[12]}</div> */}
       </div>
       <div className='column'>
         <div className='row'>
           <h2 className="counters">Score team B: </h2>
           <Counter onIncrement={(event) => handleIncrement(13)} onDecrement={(event) => handleDecrement(13)} />
         </div>
-        <div className='number'>{scores[13]}</div>
+        {/* <div className='number'>{scores[13]}</div> */}
       </div>
       <hr className="line" />
     </div>
